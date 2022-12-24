@@ -13,7 +13,7 @@ app.use(express.static("public"));
 dotenv.config();
 
 // connect mongoDB
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.qm4gv.mongodb.net/wikiDB?retryWrites=true&w=majority`);
+mongoose.connect(process.env.URL);
 
 // create a schema for blog articles
 const articlesSchema = mongoose.Schema({
@@ -118,11 +118,6 @@ app.route("/articles/:title")
 
 
 // host the app
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3000;
-}
-
-app.listen(port, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server has started successfully");
 });
